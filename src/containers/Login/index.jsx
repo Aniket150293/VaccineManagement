@@ -48,7 +48,7 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
         if (LoginDetails.data.role === "super_user") {
           history.push("/player-list");
         } else if (LoginDetails.data.role === "user") {
-          history.push("/register-sport");
+          history.push("/vaccine-details");
         }
         // else if(LoginDetails.data.role === 'bank_admin'){
         //     history.push("/customer-list");
