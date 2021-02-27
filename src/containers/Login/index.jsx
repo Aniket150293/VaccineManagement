@@ -368,7 +368,7 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
                 <h5 className="text-white mb-0 font-weight-light">
                   Here you exercise your ‘skills’ by your experience and
                   knowledge and win money, rewards and prizes in return for
-                  sure.​
+                  sure.
                 </h5>
                 <hr />
               </div>

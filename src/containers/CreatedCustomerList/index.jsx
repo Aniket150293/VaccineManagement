@@ -6,6 +6,7 @@ import {
   getRegisteredUserList,
   getSports,
   getSpetialization,
+  getList
 } from "../../actions";
 import { IoMdLock, IoIosCheckmarkCircle } from "react-icons/io";
 import { CSVLink } from "react-csv";
@@ -20,6 +21,7 @@ export default function CreatedCustomerList({
   getSportsSucsses,
   getSpetializationSucsses,
   getSpetialization,
+  getList, getListsuccess
 }) {
   const [isSubmit, setIsSubmit] = useState();
   const [Class, SetClass] = useState();
@@ -42,21 +44,30 @@ export default function CreatedCustomerList({
   const [specialization, setspecialization] = useState();
 
   useEffect(() => {
-    getSports(
-      { userid: localStorage.getItem("userid") },
-      localStorage.getItem("token")
-    );
-    getSpetialization(
-      {
-        userid: localStorage.getItem("userid"),
-      },
-      localStorage.getItem("token")
-    );
+
     getRegisteredUserList(
       { userid: localStorage.getItem("userid"), months: "" },
       localStorage.getItem("token")
     );
+    getList(
+      { userid: localStorage.getItem("userid") },
+      localStorage.getItem("token")
+    );
   }, []);
+
+  const [data, setData] = useState([]);
+  React.useEffect(() => {
+    if (getListsuccess) {
+
+      if (getListsuccess.status == 200) {
+        console.log(getListsuccess);
+        setData(getListsuccess.data);
+      }
+    }
+  }, [getListsuccess]);
+
+
+
 
   React.useEffect(() => {
     if (RegisteredUserList)
@@ -69,19 +80,9 @@ export default function CreatedCustomerList({
       }
   }, [RegisteredUserList]);
 
-  React.useEffect(() => {
-    if (getSportsSucsses)
-      if (getSportsSucsses.status == 200) {
-        setsport(getSportsSucsses.data);
-      }
-  }, [getSportsSucsses]);
 
-  React.useEffect(() => {
-    if (getSpetializationSucsses)
-      if (getSpetializationSucsses.status == 200) {
-        setspecialization(getSpetializationSucsses.data);
-      }
-  }, [getSpetializationSucsses]);
+
+
 
   React.useEffect(() => {
     if (registeredUserDetails)
@@ -142,7 +143,7 @@ export default function CreatedCustomerList({
       <Form className="shadow card mt-5">
         <div className="card-header">
           <Row className="align-items-center">
-            <div className="col">List of Players</div>
+            <div className="col">List of Customers</div>
             <div className="col">
               <Input
                 className="form-control-alternative"
@@ -179,8 +180,8 @@ export default function CreatedCustomerList({
                 <th>Mobile</th>
                 {/* <th>Address</th> */}
                 <th>Age</th>
-                <th>Sport</th>
-                <th>Spetialization</th>
+                <th>vaccine name</th>
+                <th>company name</th>
                 <th>Payment</th>
               </tr>
             </thead>
@@ -189,7 +190,7 @@ export default function CreatedCustomerList({
                 data1.map((item) => {
                   return (
                     <tr>
-                      <td>{item.id}</td>
+                      <td>{item.user_id}</td>
                       <td>
                         {item.first_name} {item.middle_name} {item.last_name}
                       </td>
@@ -197,30 +198,30 @@ export default function CreatedCustomerList({
                       <td>{item.mobile}</td>
                       {/* <td>{item.address}</td> */}
                       <td>
-                        {item.years_age} Years {item.months_age} Months
+                        {item.age} Years
                       </td>
                       {/* <td>{item.sport_id}</td> */}
 
                       <td>
-                        {item.name}
-                        {sport
+                        {item.vname}
+                        {/* {sport
                           ? sport.map((item1) => {
-                              if (item1.id == item.sport_id)
-                                console.log(item1.id + " " + item1.name);
-                              item1.name;
-                            })
-                          : "Not Available"}
+                            if (item1.id == item.sport_id)
+                              console.log(item1.id + " " + item1.name);
+                            item1.name;
+                          })
+                          : "Not Available"} */}
                       </td>
                       {/* <td>{item.specialization_id}</td> */}
                       <td>
-                        {item.sname}
-                        {specialization
+                        {item.company_name}
+                        {/* {specialization
                           ? specialization.map((item1) => {
-                              if (item1.id == item.specialization_id)
-                                console.log(item1.id + " " + item1.name);
-                              item1.name;
-                            })
-                          : "Not Available"}
+                            if (item1.id == item.specialization_id)
+                              console.log(item1.id + " " + item1.name);
+                            item1.name;
+                          })
+                          : "Not Available"} */}
                       </td>
                       <td>{item.status}</td>
                       {/* <td>Rs. 250 /-</td> */}
@@ -228,8 +229,8 @@ export default function CreatedCustomerList({
                   );
                 })
               ) : (
-                <tr></tr>
-              )}
+                  <tr></tr>
+                )}
             </tbody>
           </Table>
         </div>
@@ -251,15 +252,13 @@ export default function CreatedCustomerList({
 const mapDispatchToProps = {
   getRegisteredUserList: getRegisteredUserList,
   submitRegisteredUser: submitRegisteredUser,
-  getSports: getSports,
-  getSpetialization: getSpetialization,
+  getList: getList
 };
 
 const mapStateToProps = (state) => ({
   RegisteredUserList: state.registeredUserList,
   registeredUserDetails: state.registeredUserDetails,
-  getSportsSucsses: state.getSportsSucsses,
-  getSpetializationSucsses: state.getSpetializationSucsses,
+  getListsuccess: state.getListsuccess
 });
 
 CreatedCustomerList = connect(

@@ -21,7 +21,8 @@ export default function Payment({ payment, paymentParams }) {
   const [months, setMonths] = useState("");
   const [spetialization, setSpetialization] = useState("");
   // const [location, setLocation] = useState("");
-
+  const [paymentFail, setPaymentFail] = useState("notsuccess");
+  const [paymentsuccess, setPaymentsuccess] = useState("Success");
   var paybutton,
     history = useHistory();
   if (history.location.pathname == "/payment/500") {
@@ -48,7 +49,10 @@ export default function Payment({ payment, paymentParams }) {
           </Row>
         </CardBody>
       </Card>
-    );
+
+    )
+
+    localStorage.setItem("paymentin", paymentFail);
   } else if (history.location.pathname == "/payment/200") {
     paybutton = (
       //   <button
@@ -72,7 +76,10 @@ export default function Payment({ payment, paymentParams }) {
           </Row>
         </CardBody>
       </Card>
-    );
+    )
+    setPaymentsuccess("success")
+    localStorage.setItem('paymentin', paymentsuccess);
+    history.push('/list');
   } else {
     paybutton = (
       <button type="button" className="btn btn-dark" onClick={handleSubmit}>
@@ -169,7 +176,7 @@ export default function Payment({ payment, paymentParams }) {
     }, 5000);
   }
 
-  React.useEffect(() => {}, []);
+  React.useEffect(() => { }, []);
 
   return (
     <div className="py-5 " style={{ "background-color": "#333333" }}>
@@ -191,9 +198,9 @@ export default function Payment({ payment, paymentParams }) {
                     </CardTitle>
                     <hr />
                     <span className="mt-3 text-white font-weight-bold mb-0">
-                      {"Username : " + localStorage.getItem("first_name")}
-                      {" " + localStorage.getItem("middle_name")}
-                      {" " + localStorage.getItem("last_name")}
+                      {"Username : " + localStorage.getItem("firstname")}
+                      {/* {" " + localStorage.getItem("middle_name")} */}
+                      {" " + localStorage.getItem("lastname")}
                       <br />
                       {"Email : " + localStorage.getItem("email")}
                       <br />

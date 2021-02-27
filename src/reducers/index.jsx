@@ -69,6 +69,9 @@ const reducer = (state = INITIAL_STATE, action) => {
     case "getVirussuccess":
       return { ...state, getVirussuccess: action.json, loading: false };
 
+    case "getcompanysuccess":
+      return { ...state, getcompanysuccess: action.json, loading: false };
+
     case "getSportsSucsses":
       return { ...state, getSportsSucsses: action.json, loading: false };
 
@@ -77,6 +80,12 @@ const reducer = (state = INITIAL_STATE, action) => {
 
     case "getstatesucces":
       return { ...state, getstatesucces: action.json, loading: false };
+
+    case "getVcountsuccess":
+      return { ...state, getVcountsuccess: action.json, loading: false };
+
+    case "getListsuccess":
+      return { ...state, getListsuccess: action.json, loading: false };
 
     case "getcountrysuccess":
       return { ...state, getcountrysuccess: action.json, loading: false };

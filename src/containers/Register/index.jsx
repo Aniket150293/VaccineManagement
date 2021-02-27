@@ -211,8 +211,8 @@ React.useEffect(() => {
               <option value="">Select Bank</option>
               {data1
                 ? data1.map((item) => (
-                    <option value={item.id}>{item.bank}</option>
-                  ))
+                  <option value={item.id}>{item.bank}</option>
+                ))
                 : "Not Available"}
             </Input>
             {validateMsgValid}
@@ -246,10 +246,10 @@ React.useEffect(() => {
         setDate(
           new Date(
             RegisteredUserDetails.data.rows[0].year_of_birth +
-              "-" +
-              RegisteredUserDetails.data.rows[0].month_of_birth +
-              "-" +
-              RegisteredUserDetails.data.rows[0].date_of_birth
+            "-" +
+            RegisteredUserDetails.data.rows[0].month_of_birth +
+            "-" +
+            RegisteredUserDetails.data.rows[0].date_of_birth
           )
         );
         // setMonth(RegisteredUserDetails.data.rows[0].month_of_birth);
@@ -372,7 +372,7 @@ React.useEffect(() => {
     }
   }
   return (
-    <div className="py-5" style={{ "background-color": "#333333" }}>
+    <div className="py-5" style={{ "background-color": "#98FB98" }}>
       <Modal
         className="modal-dialog modal-danger"
         contentClassName={Class}
@@ -559,8 +559,8 @@ React.useEffect(() => {
                   <option value="">Choose Country</option>
                   {countrydata
                     ? countrydata.map((item) => (
-                        <option value={item.id}>{item.name}</option>
-                      ))
+                      <option value={item.id}>{item.name}</option>
+                    ))
                     : "not available"}
                 </Input>
                 {validateMsgValid}
@@ -581,8 +581,8 @@ React.useEffect(() => {
                   <option value="">Choose State</option>
                   {data
                     ? data.map((item) => (
-                        <option value={item.id}>{item.name}</option>
-                      ))
+                      <option value={item.id}>{item.name}</option>
+                    ))
                     : "not available"}
                 </Input>
                 {validateMsgValid}
@@ -686,15 +686,15 @@ React.useEffect(() => {
             {edit ? (
               ""
             ) : (
-              <Button
-                color="primary"
-                className="btn btn-primary"
-                to="/"
-                tag={Link}
-              >
-                Back To Login
-              </Button>
-            )}
+                <Button
+                  color="primary"
+                  className="btn btn-primary"
+                  to="/"
+                  tag={Link}
+                >
+                  Back To Login
+                </Button>
+              )}
           </Form>
         </div>
       </Container>

@@ -156,3 +156,22 @@ export const callback = (data, token) => ({
   token: token,
   data: data,
 });
+
+export const getCompany = (data, token) => ({
+  type: "getCompany",
+  token: token,
+  data: data,
+});
+
+
+export const getVcount = (data, token) => ({
+  type: "getVcount",
+  token: token,
+  data: data,
+});
+
+export const getList = (data, token) => ({
+  type: "getList",
+  token: token,
+  data: data,
+});

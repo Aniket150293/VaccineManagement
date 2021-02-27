@@ -12,7 +12,8 @@ import ForgotPassword from "../containers/ForgotPassword";
 import ChangePassword from "../containers/ChangePassword";
 import Payment from "../containers/Payment";
 import Myregisteredsport from "../containers/Myregisteredsport";
-
+import Form from '../containers/Form1';
+import List from "../containers/List";
 let App = () => (
   <Router>
     <Header />
@@ -32,9 +33,9 @@ let App = () => (
     <Route path="/player-list/" component={CreatedCustomerList} />
 
     <Route path="/vaccine-details/" component={VaccineDetails} />
-
+    <Route path="/form1/" component={Form} />
     <Route path="/payment/" component={Payment} />
-
+    <Route path="/list" component={List} />
     <Route path="/myregisteredsport/" component={Myregisteredsport} />
 
     <Footer />

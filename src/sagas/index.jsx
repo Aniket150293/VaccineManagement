@@ -25,12 +25,16 @@ const devapi = {
   callback: url + "callback/callback",
 
   getVirus: url + "VirusDetails/getVirus",
+  getCompany: url + "registereduserdetails/getCompany",
   getSports: url + "VirusDetails/getSports",
   getState: url + "registereduserdetails/getState",
 
   getCountry: url + "registereduserdetails/getCountry",
   getMysport: url + "VirusDetails/getMysport",
   getSpetialization: url + "VirusDetails/getSpetialization",
+
+  getVcount: url + "VirusDetails/getVcount",
+  getList: url + "VirusDetails/getList"
 };
 
 function* checkLoginDetails(action) {
@@ -336,6 +340,44 @@ function* callback(action) {
   yield put({ type: "paymentStatus", json: json });
 }
 
+function* getCompany(action) {
+  const json = yield fetch(devapi.getCompany, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: action.token,
+    },
+    body: JSON.stringify(action.data),
+  }).then((response) => response.json());
+  yield put({ type: "getcompanysuccess", json: json });
+}
+
+function* getVcount(action) {
+  const json = yield fetch(devapi.getVcount, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: action.token,
+    },
+    body: JSON.stringify(action.data),
+  }).then((response) => response.json());
+  yield put({ type: "getVcountsuccess", json: json });
+}
+
+function* getList(action) {
+  const json = yield fetch(devapi.getList, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: action.token,
+    },
+    body: JSON.stringify(action.data),
+  }).then((response) => response.json());
+  yield put({ type: "getListsuccess", json: json });
+}
+
+
+
 function* actionWatcher() {
   yield takeLatest("CHECK_LOGIN_DETAILS", checkLoginDetails);
   yield takeLatest("GET_REGISTERED_USER_LIST", getRegisteredUserList);
@@ -366,6 +408,10 @@ function* actionWatcher() {
   yield takeLatest("getSpetialization", getSpetialization);
 
   yield takeLatest("logout", logout);
+
+  yield takeLatest("getCompany", getCompany);
+  yield takeLatest("getVcount", getVcount);
+  yield takeLatest("getList", getList);
 }
 
 export default function* rootSaga() {

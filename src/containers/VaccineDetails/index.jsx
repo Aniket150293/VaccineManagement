@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
   registerBankByAdmin,
+  getState,
   getVirus,
   getSports,
   getSpetialization,
   submitRegisteredUser,
+  getCompany,
+  getVcount
 } from "../../actions";
 import { useHistory } from "react-router";
 import {
@@ -20,6 +23,7 @@ import {
   CardTitle,
 } from "reactstrap";
 import { Form } from "react-bootstrap";
+import Cardv from "../Vaccinecarddetails/index";
 
 export default function VaccineDetails({
   registerBankByAdmin,
@@ -32,12 +36,23 @@ export default function VaccineDetails({
   getSpetialization,
   submitRegisteredUser,
   submitRegisteredUserSucsses,
+  getState,
+  getstatesucces,
+  getCompany,
+  getcompanysuccess,
+  getVcount, getVcountsuccess
 }) {
   const [sport, setSport] = useState("");
   const [role, setRole] = useState("");
   const [years, setYears] = useState("");
   const [months, setMonths] = useState("");
   const [spetialization, setSpetialization] = useState("");
+  const [showcard, setshowcard] = useState(false);
+  const [cname, setCname] = useState("");
+
+  let vaccine_count = {};
+  let vaccine_amount = {};
+
   // const [location, setLocation] = useState("");
   var history = useHistory();
   var validateMsgValid = (
@@ -64,6 +79,8 @@ export default function VaccineDetails({
       { userid: localStorage.getItem("userid") },
       localStorage.getItem("token")
     );
+
+
   }, []);
 
   const [first_name, setfirst_name] = useState();
@@ -82,6 +99,16 @@ export default function VaccineDetails({
         setmobile(submitRegisteredUserSucsses.data.rows[0].mobile);
       }
   }, [submitRegisteredUserSucsses]);
+  const [vcountdata, setVcountdata] = useState();
+
+  React.useEffect(() => {
+    if (getVcountsuccess)
+      if (getVcountsuccess.status == 200) {
+        setVcountdata(getVcountsuccess.data);
+      }
+  }, [getVcountsuccess]);
+
+
 
   const [data1, setdata1] = useState();
 
@@ -109,6 +136,35 @@ export default function VaccineDetails({
       }
   }, [getVirussuccess]);
 
+  const [data, setdata] = useState();
+  React.useEffect(() => {
+    if (getstatesucces)
+      if (getstatesucces.status == 200) {
+        setdata(getstatesucces.data);
+      }
+  }, [getstatesucces]);
+
+  const [data3, setdata3] = useState();
+  React.useEffect(() => {
+    if (getcompanysuccess)
+      if (getcompanysuccess.status == 200) {
+        setdata3(getcompanysuccess.data);
+      }
+  }, [getcompanysuccess]);
+
+  // function function1() {
+  //   // setshowcard = true;
+  //   setshowcard = true
+  // }
+  const fn1 = () => {
+    setshowcard(true)
+    // getCompany(
+    //   { userid: localStorage.getItem("userid") },
+
+    //   localStorage.getItem("token")
+    // );
+
+  }
   function handleSubmit(e) {
     e.preventDefault();
     if (e.currentTarget.checkValidity()) {
@@ -119,13 +175,23 @@ export default function VaccineDetails({
         role: role,
         months: months,
         spetialization: spetialization,
+        cname: cname,
+        // cid: cid
         // "location":location,
       };
-      registerBankByAdmin(data, localStorage.getItem("token"));
+      var countdata = {
+        vid: vid
+      };
+      //registerBankByAdmin(data, localStorage.getItem("token"));
+      getVcount(
+        countdata, localStorage.getItem("token")
+      );
+
     }
     setIsSubmit(true);
   }
   const [isSubmit, setIsSubmit] = useState();
+  const [vid, setVid] = useState();
   const [Class, SetClass] = useState();
   const [Msg, SetMsg] = useState();
   const [Notification, SetNotification] = useState(false);
@@ -139,7 +205,13 @@ export default function VaccineDetails({
       NotificationClose();
     }, 5000);
   }
+  React.useEffect(() => {
 
+
+
+    localStorage.setItem("companyid", cname);
+    localStorage.setItem("virusid", role);
+  });
   React.useEffect(() => {
     if (registeredBankDetailsByAdmin)
       if (isSubmit) {
@@ -149,12 +221,14 @@ export default function VaccineDetails({
           localStorage.setItem("middle_name", middle_name);
           localStorage.setItem("email", email);
           localStorage.setItem("mobile", mobile);
+
           // NotificationModel("bg-success", "User Added Sucssesfully");
           setRole("");
           setSport("");
           setYears("");
           setMonths("");
           setSpetialization("");
+          setCname("");
           // setLocation("");
           history.push("/payment");
         } else {
@@ -238,14 +312,25 @@ export default function VaccineDetails({
                         value={role}
                         className="form-control-alternative"
                         type="select"
-                        placeholder="Enter Role"
-                        onChange={(e) => setRole(e.target.value)}
+                        placeholder="Select virus name"
+                        onChange={(e) => {
+                          setRole(e.target.value)
+                          setVid(e.target.value)
+                          getCompany({
+                            id: e.target.value,
+
+                            userid: localStorage.getItem("userid"),
+                          },
+                            localStorage.getItem("token")
+                          );
+
+                        }}
                       >
                         <option value="">Select Virus Preventive</option>
                         {virusdata
                           ? virusdata.map((item) => (
-                              <option value={item.id}>{item.name}</option>
-                            ))
+                            <option value={item.id}>{item.vname}</option>
+                          ))
                           : "not available"}
                       </Input>
                       {validateMsgValid}
@@ -314,17 +399,21 @@ export default function VaccineDetails({
                     <Form.Group as={Col} lg="12" sm="12">
                       <Input
                         required
-                        value={spetialization}
+                        value={cname}
                         className="form-control-alternative"
                         type="select"
                         placeholder="Select Spetialization"
-                        onChange={(e) => setSpetialization(e.target.value)}
+                        onChange={(e) => {
+                          setCname(e.target.value)
+
+
+                        }}
                       >
                         <option value="">Select Company</option>
-                        {data2
-                          ? data2.map((item) => (
-                              <option value={item.id}>{item.name}</option>
-                            ))
+                        {data3
+                          ? data3.map((item) => (
+                            <option value={item.id}>{item.company_name}</option>
+                          ))
                           : "Not Available"}
                       </Input>
                       {validateMsgValid}
@@ -332,17 +421,44 @@ export default function VaccineDetails({
                     </Form.Group>
                   </Row>
 
+
+
                   <br></br>
 
-                  <Button color="danger" type="submit" className="">
+                  <Button color="danger" type="submit" className="" onClick={fn1}>
                     View Details
                   </Button>
+
                 </Form>
               </div>
             </div>
+
           </Col>
-        </Row>
+        </Row><br></br>
+        {/* <div style={{}}> */}
+        <Col>
+          <Row>
+            {
+              vcountdata
+                ? vcountdata.map((item) => {
+
+
+                  vaccine_count.a = item.available_count;
+                  vaccine_amount.b = item.amount_per_dose;
+                  console.log(vaccine_count.a);
+                })
+
+
+                : ""
+            }
+
+            {(showcard == true ? <Cardv countv={vaccine_count.a} amount={vaccine_amount.b} /> : "")}
+            {/* {console.log(showcard)} */}
+          </Row>
+        </Col>
+        {/* </div> */}
       </Container>
+
     </div>
   );
 }
@@ -353,6 +469,9 @@ const mapDispatchToProps = {
   getSports: getSports,
   getSpetialization: getSpetialization,
   submitRegisteredUser: submitRegisteredUser,
+  getState: getState,
+  getCompany: getCompany,
+  getVcount: getVcount
 };
 
 const mapStateToProps = (state) => ({
@@ -361,6 +480,9 @@ const mapStateToProps = (state) => ({
   getSportsSucsses: state.getSportsSucsses,
   getSpetializationSucsses: state.getSpetializationSucsses,
   submitRegisteredUserSucsses: state.registeredUserDetails,
+  getstatesucces: state.getstatesucces,
+  getcompanysuccess: state.getcompanysuccess,
+  getVcountsuccess: state.getVcountsuccess
 });
 
 VaccineDetails = connect(mapStateToProps, mapDispatchToProps)(VaccineDetails);

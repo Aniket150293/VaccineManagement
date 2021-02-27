@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'vaccine_management'
+  database: 'vcmng'
 })
 
 connection.connect(function (err) {

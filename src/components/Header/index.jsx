@@ -48,52 +48,52 @@ export default function Header({ logout }) {
           <DropdownToggle nav>
             <i className="ni ni-collection d-lg-none mr-1" />
             <span className="font-weight-bold nav-link-inner--text text-danger">
-              Player List
+              Customer List
             </span>
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem to="/player-list" tag={Link}>
-              Player List
+              Customer List
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>
     );
   } else if (localStorage.getItem("role") === "user") {
-    tabBar = (
-      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-        <UncontrolledDropdown nav>
-          <DropdownToggle nav>
-            <i className="ni ni-collection d-lg-none mr-1" />
-            <span className="font-weight-bold nav-link-inner--text text-danger">
-              Register Sport
-            </span>
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem to="/register-sport" tag={Link}>
-              Register Sport
-            </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
-      </Nav>
-    );
-    tabBar4 = (
-      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-        <UncontrolledDropdown nav>
-          <DropdownToggle nav>
-            <i className="ni ni-collection d-lg-none mr-1" />
-            <span className="font-weight-bold nav-link-inner--text text-danger">
-              My Registered Sport
-            </span>
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem to="/myregisteredsport" tag={Link}>
-              My Registered Sport
-            </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
-      </Nav>
-    );
+    //   tabBar = (
+    //     <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+    //       <UncontrolledDropdown nav>
+    //         <DropdownToggle nav>
+    //           <i className="ni ni-collection d-lg-none mr-1" />
+    //           <span className="font-weight-bold nav-link-inner--text text-danger">
+    //             Register Sport
+    //           </span>
+    //         </DropdownToggle>
+    //         <DropdownMenu>
+    //           <DropdownItem to="/register-sport" tag={Link}>
+    //             Register Sport
+    //           </DropdownItem>
+    //         </DropdownMenu>
+    //       </UncontrolledDropdown>
+    //     </Nav>
+    //   );
+    //   tabBar4 = (
+    //     <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+    //       <UncontrolledDropdown nav>
+    //         <DropdownToggle nav>
+    //           <i className="ni ni-collection d-lg-none mr-1" />
+    //           <span className="font-weight-bold nav-link-inner--text text-danger">
+    //             My Registered Sport
+    //           </span>
+    //         </DropdownToggle>
+    //         <DropdownMenu>
+    //           <DropdownItem to="/myregisteredsport" tag={Link}>
+    //             My Registered Sport
+    //           </DropdownItem>
+    //         </DropdownMenu>
+    //       </UncontrolledDropdown>
+    //     </Nav>
+    //   );
   }
 
   if (localStorage.getItem("role") != null) {

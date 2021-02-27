@@ -17,8 +17,8 @@ router.post("/submitTransferMoneyDetails", (req, res, next) => {
 
         connection.query(
           "INSERT INTO transaction_details " +
-            "( transaction_id,  mode_of_transfer, type_of_transfer,from_account,to_account, amount,from_bank_id,  to_bank_id, from_user_id, to_user_id, performed_date, is_pending, is_cancelled, is_approved,  performed_by ) " +
-            "VALUES (?,?,0,?,?,?,?,?,?,?,now(),1,0,0,?) ",
+          "( transaction_id,  mode_of_transfer, type_of_transfer,from_account,to_account, amount,from_bank_id,  to_bank_id, from_user_id, to_user_id, performed_date, is_pending, is_cancelled, is_approved,  performed_by ) " +
+          "VALUES (?,?,0,?,?,?,?,?,?,?,now(),1,0,0,?) ",
           [
             transactionId,
             req.body.mode,
@@ -240,6 +240,17 @@ router.post("/getVirus", (req, res, next) => {
   );
 });
 
+// router.post("/getcompany", (req, res, next) => {
+//   connection.query("SELECT * FROM company_master where id=?", [req.body.id], function (err, rows) {
+//     if (err) {
+//       res.send({ status: 500, data: {} });
+//     } else {
+//       res.send({ status: 200, data: rows, msg: "get Successfully" });
+//     }
+//   });
+// });
+
+
 router.post("/getSpetialization", (req, res, next) => {
   jwt.verify(
     req.headers["authorization"],
@@ -284,5 +295,26 @@ router.post("/getSpetialization", (req, res, next) => {
     }
   );
 });
-
+router.post("/getVcount", (req, res, next) => {
+  connection.query("SELECT available_count,amount_per_dose from vaccine_available_count where vaccine_id=? ", [req.body.vid],
+    //[req.body.id],
+    function (err, rows) {
+      if (err) {
+        res.send({ status: 500, data: {} });
+      } else {
+        res.send({ status: 200, data: rows, msg: "get Successfully" });
+      }
+    });
+});
+router.post("/getList", (req, res, next) => {
+  connection.query("Select vname,company_name,Total_quantity,Final_amount, DATE_FORMAT(vaccine_details.created_date,'%d-%m-%y') as cddate  FROM ((vaccine_details INNER JOIN  company_master ON  vaccine_details.company_id=company_master.id) INNER JOIN virus_details ON vaccine_details.vaccine_id=virus_details.id) WHERE user_id=?", [req.body.userid],
+    //[req.body.id],
+    function (err, rows) {
+      if (err) {
+        res.send({ status: 500, data: {} });
+      } else {
+        res.send({ status: 200, data: rows, msg: "get Successfully" });
+      }
+    });
+});
 module.exports = router;

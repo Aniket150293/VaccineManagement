@@ -27,19 +27,19 @@ router.post("/getRegisteredUserList", function (req, res, next) {
 
           //var a = connection.query("SELECT user_sport_mapping.user_id as id,user_details.first_name,user_details.email,user_details.mobile ,user_sport_mapping.years_age,sports_master.name FROM user_sport_mapping INNER JOIN user_details on user_details.id=user_sport_mapping.user_id INNER JOIN sports_master on sports_master.id=user_sport_mapping.sport_id and user_sport_mapping.created_date between '"+y+"-"+m+"-"+ getDate+"' and '"+ getFullYear+"-"+ getMonth+"-"+ getDate+"'",
           var a = connection.query(
-            "SELECT specialization_master.name as sname, user_sport_mapping.user_id as id,user_details.first_name,user_details.email,user_details.mobile ,user_sport_mapping.years_age,user_sport_mapping.months_age,sports_master.name FROM user_sport_mapping INNER JOIN specialization_master ON specialization_master.id=user_sport_mapping.sport_id INNER JOIN user_details on user_details.id=user_sport_mapping.user_id INNER JOIN sports_master on sports_master.id=user_sport_mapping.sport_id and user_sport_mapping.created_date between '" +
-              y +
-              "-" +
-              m +
-              "-" +
-              getDate +
-              "' and '" +
-              getFullYear +
-              "-" +
-              getMonth +
-              "-" +
-              getDate +
-              "'",
+            "SELECT vaccine_details.first_name,vaccine_details.last_name,user_id,age,user_id,mobile,email,vname,company_name, DATE_FORMAT(vaccine_details.created_date,'%d-%m-%y') as cddate FROM (((vaccine_details INNER JOIN user_details ON vaccine_details.user_id=user_details.id) INNER JOIN  company_master ON  vaccine_details.company_id=company_master.id) INNER JOIN virus_details ON vaccine_details.vaccine_id=virus_details.id )WHERE DATE(vaccine_details.created_date)BETWEEN '" +
+            y +
+            "-" +
+            m +
+            "-" +
+            getDate +
+            "' and '" +
+            getFullYear +
+            "-" +
+            getMonth +
+            "-" +
+            getDate +
+            "'",
 
             function (err, rows) {
               if (err) {
@@ -65,19 +65,19 @@ router.post("/getRegisteredUserList", function (req, res, next) {
           var m1 = e1.getMonth() + 1;
 
           var a = connection.query(
-            "SELECT specialization_master.name as sname, user_sport_mapping.user_id as id,user_details.first_name,user_details.email,user_details.mobile ,user_sport_mapping.years_age,user_sport_mapping.months_age,sports_master.name FROM user_sport_mapping INNER JOIN specialization_master ON specialization_master.id=user_sport_mapping.sport_id INNER JOIN user_details on user_details.id=user_sport_mapping.user_id INNER JOIN sports_master on sports_master.id=user_sport_mapping.sport_id and user_sport_mapping.created_date between '" +
-              y1 +
-              "-" +
-              getMonth1 +
-              "-" +
-              getDate1 +
-              "' and '" +
-              getFullYear1 +
-              "-" +
-              m1 +
-              "-" +
-              getDate1 +
-              "'",
+            "SELECT vaccine_details.first_name,vaccine_details.last_name,user_id,age,user_id,mobile,email,vname,company_name, DATE_FORMAT(vaccine_details.created_date,'%d-%m-%y') as cddate FROM (((vaccine_details INNER JOIN user_details ON vaccine_details.user_id=user_details.id) INNER JOIN  company_master ON  vaccine_details.company_id=company_master.id) INNER JOIN virus_details ON vaccine_details.vaccine_id=virus_details.id )WHERE DATE(vaccine_details.created_date)BETWEEN '" +
+            y1 +
+            "-" +
+            getMonth1 +
+            "-" +
+            getDate1 +
+            "' and '" +
+            getFullYear1 +
+            "-" +
+            m1 +
+            "-" +
+            getDate1 +
+            "'",
             function (err, rows) {
               if (err) {
                 res.send({ status: 500, data: {} });
@@ -103,8 +103,8 @@ router.post("/getRegisteredUserList", function (req, res, next) {
 router.post("/contact", function (req, res, next) {
   var a = connection.query(
     "INSERT INTO  contact_details " +
-      " (	name, email, message, added_on)" +
-      "VALUES (?,?,?,now())",
+    " (	name, email, message, added_on)" +
+    "VALUES (?,?,?,now())",
     [req.body.cname, req.body.cemail, req.body.cmessage],
     function (error, innerRows) {
       console.log(a.sql);
@@ -216,10 +216,10 @@ router.post("/upload", function (req, res, next) {
 
     var a = connection.query(
       "INSERT INTO  user_details " +
-        "( profile, email, password, mobile, alternate_mobile, " +
-        "first_name, middle_name, last_name, address, city, state,country, zip_code, date_of_birth, " +
-        "month_of_birth, year_of_birth, role, is_active, is_blocked, last_login, created_at,modified_at ) " +
-        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,0,now(),now(),now()) ",
+      "( profile, email, password, mobile, alternate_mobile, " +
+      "first_name, middle_name, last_name, address, city, state,country, zip_code, date_of_birth, " +
+      "month_of_birth, year_of_birth, role, is_active, is_blocked, last_login, created_at,modified_at ) " +
+      "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,0,now(),now(),now()) ",
       [
         profileID,
         req.body.email,
@@ -318,8 +318,8 @@ router.post("/submitBankDetailsByUser", function (req, res, next) {
       } else {
         var a = connection.query(
           "INSERT INTO  user_bank_mapping " +
-            " (	user_id, bank_id, account_no, is_active, created_at, modified_at)" +
-            "VALUES (?,?,?,1,now(),now())",
+          " (	user_id, bank_id, account_no, is_active, created_at, modified_at)" +
+          "VALUES (?,?,?,1,now(),now())",
           [req.body.userId, req.body.bank, req.body.accountNo],
           function (error, innerRows) {
             console.log(a.sql);
@@ -422,6 +422,46 @@ router.post("/getCountry", function (req, res, next) {
   });
 });
 
+router.post("/getCompany", (req, res, next) => {
+  //   connection.query("SELECT * FROM company_master where id=?",
+  //     [req.body.id],
+  //     function (err, rows) {
+  //       if (err) {
+  //         res.send({ status: 500, data: {} });
+  //       } else {
+  //         res.send({ status: 200, data: rows, msg: "get Successfully" });
+  //       }
+  //     });
+  // });
+  jwt.verify(req.headers['authorization'], toString(req.body.userid), function (err, data) {
+    if (err) {
+      res.send({ status: 403, msg: 'Forbidden' });
+    } else {
+      if (req.body.id) {
+        connection.query('SELECT * FROM company_master where id = ?', [req.body.id],
+          function (err, rows) {
+            if (err) {
+              res.send({ status: 500, data: {} });
+            } else {
+              res.send({ status: 200, data: rows, msg: 'getAccounts Successfully' });
+            }
+          })
+      }
+      else {
+        connection.query('SELECT * FROM company_master',
+          function (err, rows) {
+            if (err) {
+              res.send({ status: 500, data: {} });
+            } else {
+              res.send({ status: 200, data: rows, msg: 'getAccounts Successfully' });
+            }
+          })
+      }
+
+    }
+  })
+});
+
 /*
 
   router.post('/getRegisteredUserList', function(req, res, next) {
@@ -460,5 +500,36 @@ router.post("/getCountry", function (req, res, next) {
   });
 
 */
+router.post("/upload1", function (req, res, next) {
+  jwt.verify(
+    req.headers["authorization"],
+    toString(req.body.userId),
+    function (err, data) {
+      if (err) {
+        res.send({ status: 403, msg: "Forbidden" });
+      } else {
+        var a = connection.query(
+          "INSERT INTO  vaccine_details " +
+          " (user_id,first_name,last_name,age,address,company_id,vaccine_id,Total_available_count,Amount_per_dose,Total_quantity,Final_amount,gender,created_date,is_active)" +
+          "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,now(),1)",
+          [req.body.usrid, req.body.firstname, req.body.lastname, req.body.age, req.body.address, req.body.cname, req.body.vname, req.body.vaccine_count, req.body.vaccine_amount, req.body.total_dose, req.body.setFinalamt, req.body.gender],
+          function (error, innerRows) {
+            console.log(a.sql);
+            if (error) {
+              res.send({ status: 500, data: error });
+            } else {
+              res.send({
+                status: 200,
+                data: innerRows,
+                msg: "vaccine details Added Successfully",
+              });
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
 
 module.exports = router;

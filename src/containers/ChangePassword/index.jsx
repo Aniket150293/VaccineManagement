@@ -70,7 +70,7 @@ export default function ChangePassword({
   }
 
   return (
-    <div class="py-5" style={{ "background-color": "#333333" }}>
+    <div class="py-5" style={{ "background-color": "#98FB98" }}>
       <div className="container mt-5">
         <Modal
           className="modal-dialog modal-danger"

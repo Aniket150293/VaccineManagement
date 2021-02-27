@@ -106,7 +106,7 @@ export default function ForgetPassword({
 
   if (path == "/forgot-password") {
     form = (
-      <div className="bg-secondary shadow card">
+      <div className="bg-secondary shadow card" >
         <div className="card-header">Forgot Password</div>
         <div className="card-body">
           <Form noValidate validated={isSubmit} onSubmit={submitForgotPassword}>
@@ -154,7 +154,7 @@ export default function ForgetPassword({
     let currentdate = d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear();
     if (currentdate == date && diff(mailtime, currenttime)) {
       form = (
-        <div className="bg-secondary shadow card">
+        <div className="bg-secondary shadow card" style={{ "background-color": "#98FB98" }}>
           <div className="card-header">Forgot Password</div>
           <div className="card-body">
             <Form
@@ -163,7 +163,7 @@ export default function ForgetPassword({
               onSubmit={submitResetPassword}
             >
               <Form.Group>
-                <Label>Enter New Password</Label>
+                <Label>Entaaaer New Password</Label>
                 <Input
                   required
                   onChange={(e) => setPassword(e.target.value)}
@@ -259,7 +259,7 @@ export default function ForgetPassword({
   }
 
   return (
-    <div class="py-5" style={{ "background-color": "#333333" }}>
+    <div class="py-5" style={{ "background-color": "#98FB98" }}>
       <div className="container mt-5">
         {form}
         <Modal
