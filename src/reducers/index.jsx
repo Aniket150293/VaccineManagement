@@ -87,6 +87,9 @@ const reducer = (state = INITIAL_STATE, action) => {
     case "getListsuccess":
       return { ...state, getListsuccess: action.json, loading: false };
 
+    case "Paymentmailsuccess":
+      return { ...state, Paymentmailsuccess: action.json, loading: false };
+
     case "getcountrysuccess":
       return { ...state, getcountrysuccess: action.json, loading: false };
     case "getSpetializationSucsses":

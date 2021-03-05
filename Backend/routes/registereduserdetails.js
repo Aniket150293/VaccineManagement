@@ -27,7 +27,8 @@ router.post("/getRegisteredUserList", function (req, res, next) {
 
           //var a = connection.query("SELECT user_sport_mapping.user_id as id,user_details.first_name,user_details.email,user_details.mobile ,user_sport_mapping.years_age,sports_master.name FROM user_sport_mapping INNER JOIN user_details on user_details.id=user_sport_mapping.user_id INNER JOIN sports_master on sports_master.id=user_sport_mapping.sport_id and user_sport_mapping.created_date between '"+y+"-"+m+"-"+ getDate+"' and '"+ getFullYear+"-"+ getMonth+"-"+ getDate+"'",
           var a = connection.query(
-            "SELECT vaccine_details.first_name,vaccine_details.last_name,user_id,age,user_id,mobile,email,vname,company_name, DATE_FORMAT(vaccine_details.created_date,'%d-%m-%y') as cddate FROM (((vaccine_details INNER JOIN user_details ON vaccine_details.user_id=user_details.id) INNER JOIN  company_master ON  vaccine_details.company_id=company_master.id) INNER JOIN virus_details ON vaccine_details.vaccine_id=virus_details.id )WHERE DATE(vaccine_details.created_date)BETWEEN '" +
+            //  "SELECT vaccine_details.first_name,vaccine_details.last_name,user_id,age,user_id,mobile,email,vname,company_name, DATE_FORMAT(vaccine_details.created_date,'%d-%m-%y') as cddate FROM (((vaccine_details INNER JOIN user_details ON vaccine_details.user_id=user_details.id) INNER JOIN  company_master ON  vaccine_details.company_id=company_master.id) INNER JOIN virus_details ON vaccine_details.vaccine_id=virus_details.id )WHERE DATE(vaccine_details.created_date)BETWEEN '" +
+            "SELECT vaccine_details.first_name,vaccine_details.last_name,user_id,age,user_id,mobile,email,vname,company_name, DATE_FORMAT(vaccine_details.created_date,'%d-%m-%y') as cddate FROM ((((vaccine_details INNER JOIN user_details ON vaccine_details.user_id=user_details.id) INNER JOIN  company_master ON  vaccine_details.company_id=company_master.id) INNER JOIN virus_details ON vaccine_details.vaccine_id=virus_details.id ) INNER JOIN comp_admin_mapping ON vaccine_details.company_id=comp_admin_mapping.uid) WHERE DATE(vaccine_details.created_date)BETWEEN '" +
             y +
             "-" +
             m +
@@ -39,7 +40,9 @@ router.post("/getRegisteredUserList", function (req, res, next) {
             getMonth +
             "-" +
             getDate +
-            "'",
+            "'and comp_admin_mapping.uid=?"
+            ,
+            [req.body.userid],
 
             function (err, rows) {
               if (err) {
@@ -65,7 +68,8 @@ router.post("/getRegisteredUserList", function (req, res, next) {
           var m1 = e1.getMonth() + 1;
 
           var a = connection.query(
-            "SELECT vaccine_details.first_name,vaccine_details.last_name,user_id,age,user_id,mobile,email,vname,company_name, DATE_FORMAT(vaccine_details.created_date,'%d-%m-%y') as cddate FROM (((vaccine_details INNER JOIN user_details ON vaccine_details.user_id=user_details.id) INNER JOIN  company_master ON  vaccine_details.company_id=company_master.id) INNER JOIN virus_details ON vaccine_details.vaccine_id=virus_details.id )WHERE DATE(vaccine_details.created_date)BETWEEN '" +
+            // "SELECT vaccine_details.first_name,vaccine_details.last_name,user_id,age,user_id,mobile,email,vname,company_name, DATE_FORMAT(vaccine_details.created_date,'%d-%m-%y') as cddate FROM (((vaccine_details INNER JOIN user_details ON vaccine_details.user_id=user_details.id) INNER JOIN  company_master ON  vaccine_details.company_id=company_master.id) INNER JOIN virus_details ON vaccine_details.vaccine_id=virus_details.id )WHERE DATE(vaccine_details.created_date)BETWEEN '" +
+            "SELECT vaccine_details.first_name,vaccine_details.last_name,user_id,age,user_id,mobile,email,vname,company_name, DATE_FORMAT(vaccine_details.created_date,'%d-%m-%y') as cddate FROM ((((vaccine_details INNER JOIN user_details ON vaccine_details.user_id=user_details.id) INNER JOIN  company_master ON  vaccine_details.company_id=company_master.id) INNER JOIN virus_details ON vaccine_details.vaccine_id=virus_details.id ) INNER JOIN comp_admin_mapping ON vaccine_details.company_id=comp_admin_mapping.uid) WHERE DATE(vaccine_details.created_date)BETWEEN '" +
             y1 +
             "-" +
             getMonth1 +
@@ -77,7 +81,7 @@ router.post("/getRegisteredUserList", function (req, res, next) {
             m1 +
             "-" +
             getDate1 +
-            "'",
+            "'and comp_admin_mapping.uid=?", [req.body.userid],
             function (err, rows) {
               if (err) {
                 res.send({ status: 500, data: {} });

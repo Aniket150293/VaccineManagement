@@ -34,7 +34,8 @@ const devapi = {
   getSpetialization: url + "VirusDetails/getSpetialization",
 
   getVcount: url + "VirusDetails/getVcount",
-  getList: url + "VirusDetails/getList"
+  getList: url + "VirusDetails/getList",
+  Paymentmail: url + "VirusDetails/Paymentmail"
 };
 
 function* checkLoginDetails(action) {
@@ -376,6 +377,18 @@ function* getList(action) {
   yield put({ type: "getListsuccess", json: json });
 }
 
+function* Paymentmail(action) {
+  const json = yield fetch(devapi.Paymentmail, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: action.token,
+    },
+    body: JSON.stringify(action.data),
+  }).then((response) => response.json());
+  yield put({ type: "Paymentmailsuccess", json: json });
+}
+
 
 
 function* actionWatcher() {
@@ -412,6 +425,7 @@ function* actionWatcher() {
   yield takeLatest("getCompany", getCompany);
   yield takeLatest("getVcount", getVcount);
   yield takeLatest("getList", getList);
+  yield takeLatest("Paymentmail", Paymentmail);
 }
 
 export default function* rootSaga() {

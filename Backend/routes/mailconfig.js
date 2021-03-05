@@ -1,5 +1,5 @@
 var Mailconfig = {
-  emailid: "", //Your  Email id
-  passwd: "", //your password
+  emailid: "ashutoshka24@gmail.com", //Your  Email id
+  passwd: "ashutoshlovesnaruto@123", //your password
 };
 module.exports.Mailconfig = Mailconfig;

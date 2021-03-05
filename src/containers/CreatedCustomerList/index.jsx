@@ -46,7 +46,11 @@ export default function CreatedCustomerList({
   useEffect(() => {
 
     getRegisteredUserList(
-      { userid: localStorage.getItem("userid"), months: "" },
+
+      {
+        role: localStorage.getItem("role"),
+        userid: localStorage.getItem("userid"), months: ""
+      },
       localStorage.getItem("token")
     );
     getList(

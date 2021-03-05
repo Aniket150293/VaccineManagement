@@ -136,6 +136,7 @@ React.useEffect(() => {
       { userid: localStorage.getItem("userid") },
       localStorage.getItem("token")
     );
+    localStorage.setItem("email", email);
   }, []);
 
   const [data1, setdata1] = useState();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { payment } from "../../actions";
+import { payment, Paymentmail } from "../../actions";
 import { useHistory } from "react-router";
 import {
   Input,
@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import { Form } from "react-bootstrap";
 
-export default function Payment({ payment, paymentParams }) {
+export default function Payment({ payment, paymentParams, Paymentmail, Paymentmailsuccess }) {
   const [sport, setSport] = useState("");
   const [years, setYears] = useState("");
   const [months, setMonths] = useState("");
@@ -23,6 +23,7 @@ export default function Payment({ payment, paymentParams }) {
   // const [location, setLocation] = useState("");
   const [paymentFail, setPaymentFail] = useState("notsuccess");
   const [paymentsuccess, setPaymentsuccess] = useState("Success");
+
   var paybutton,
     history = useHistory();
   if (history.location.pathname == "/payment/500") {
@@ -76,10 +77,16 @@ export default function Payment({ payment, paymentParams }) {
           </Row>
         </CardBody>
       </Card>
+
     )
+
+    //  alert(JSON.stringify(pdata1))
+
+
     setPaymentsuccess("success")
     localStorage.setItem('paymentin', paymentsuccess);
     history.push('/list');
+
   } else {
     paybutton = (
       <button type="button" className="btn btn-dark" onClick={handleSubmit}>
@@ -107,6 +114,7 @@ export default function Payment({ payment, paymentParams }) {
     };
 
     payment(data, localStorage.getItem("token"));
+
   }
 
   function isDate(val) {
@@ -160,6 +168,9 @@ export default function Payment({ payment, paymentParams }) {
       post(details);
     }
   }, [paymentParams]);
+
+
+
 
   const [isSubmit, setIsSubmit] = useState();
   const [Class, SetClass] = useState();
@@ -225,10 +236,12 @@ export default function Payment({ payment, paymentParams }) {
 
 const mapDispatchToProps = {
   payment: payment,
+  Paymentmail: Paymentmail
 };
 
 const mapStateToProps = (state) => ({
   paymentParams: state.paymentParams,
+  Paymentmailsuccess: state.Paymentmailsuccess
 });
 
 Payment = connect(mapStateToProps, mapDispatchToProps)(Payment);

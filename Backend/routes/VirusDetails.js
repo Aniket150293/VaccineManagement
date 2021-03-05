@@ -3,7 +3,8 @@ var router = express.Router();
 var uuid = require("uuid");
 var jwt = require("jsonwebtoken");
 var connection = require("./config/index");
-
+var nodemailer = require("nodemailer");
+var config = require("./mailconfig");
 router.post("/submitTransferMoneyDetails", (req, res, next) => {
   jwt.verify(
     req.headers["authorization"],
@@ -316,5 +317,45 @@ router.post("/getList", (req, res, next) => {
         res.send({ status: 200, data: rows, msg: "get Successfully" });
       }
     });
+});
+
+
+router.post("/Paymentmail", (req, res, next) => {
+  //[req.body.id],
+  let amt = req.body.final_amount;
+  let amtperdose = req.body.amountperdose;
+  if (req.body.userid) {
+    var transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: {
+        user: config.Mailconfig.emailid,
+        pass: config.Mailconfig.passwd,
+      },
+    });
+    var mailOptions = {
+      from: "ashutoshka24@gmail.com",
+      to: req.body.email,
+      subject: "order vaccine Request",
+      html: `<p>Hi,<br/>
+              your vaccine order submitted Total amount ${amt} and amountper dose is ${amtperdose} </p>`,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        console.log("CANNOT SENTTTTT");
+        //res.send({ status: 500, data: {} });
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    })
+    data1 = "Successfull"
+    res.send({ status: 200, data: data1, msg: "Successssssssssssssssss" })
+  } else {
+    res.send({ status: 400, data: data1, msg: "nottttttttttttttttttSuccessssssssssssssssss" })
+  }
 });
 module.exports = router;

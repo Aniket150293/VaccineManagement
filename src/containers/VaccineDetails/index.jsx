@@ -8,7 +8,9 @@ import {
   getSpetialization,
   submitRegisteredUser,
   getCompany,
-  getVcount
+  getVcount,
+  payment,
+  Paymentmail
 } from "../../actions";
 import { useHistory } from "react-router";
 import {
@@ -40,7 +42,8 @@ export default function VaccineDetails({
   getstatesucces,
   getCompany,
   getcompanysuccess,
-  getVcount, getVcountsuccess
+  getVcount, getVcountsuccess,
+  Paymentmail, Paymentmailsuccess
 }) {
   const [sport, setSport] = useState("");
   const [role, setRole] = useState("");
@@ -79,7 +82,10 @@ export default function VaccineDetails({
       { userid: localStorage.getItem("userid") },
       localStorage.getItem("token")
     );
-
+    // Paymentmail(
+    //   { userid: localStorage.getItem("userid") },
+    //   localStorage.getItem("token")
+    // );
 
   }, []);
 
@@ -108,6 +114,17 @@ export default function VaccineDetails({
       }
   }, [getVcountsuccess]);
 
+  // const [pdata1, setPData1] = useState();
+  // React.useEffect(() => {
+  //   if (Paymentmailsuccess) {
+
+  //     if (Paymentmailsuccess.status == 200) {
+  //       console.log("Paymentmailsuccess");
+  //       setPData1(Paymentmailsuccess.data);
+  //       console.log(setPData1)
+  //     }
+  //   }
+  // }, [Paymentmailsuccess]);
 
 
   const [data1, setdata1] = useState();
@@ -157,6 +174,7 @@ export default function VaccineDetails({
   //   setshowcard = true
   // }
   const fn1 = () => {
+    // alert(JSON.stringify(pdata1))
     setshowcard(true)
     // getCompany(
     //   { userid: localStorage.getItem("userid") },
@@ -471,7 +489,8 @@ const mapDispatchToProps = {
   submitRegisteredUser: submitRegisteredUser,
   getState: getState,
   getCompany: getCompany,
-  getVcount: getVcount
+  getVcount: getVcount,
+  Paymentmail: Paymentmail
 };
 
 const mapStateToProps = (state) => ({
@@ -482,7 +501,8 @@ const mapStateToProps = (state) => ({
   submitRegisteredUserSucsses: state.registeredUserDetails,
   getstatesucces: state.getstatesucces,
   getcompanysuccess: state.getcompanysuccess,
-  getVcountsuccess: state.getVcountsuccess
+  getVcountsuccess: state.getVcountsuccess,
+  Paymentmailsuccess: state.Paymentmailsuccess
 });
 
 VaccineDetails = connect(mapStateToProps, mapDispatchToProps)(VaccineDetails);

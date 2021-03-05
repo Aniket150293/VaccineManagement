@@ -44,7 +44,7 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
         localStorage.setItem("lastlogin", LoginDetails.data.last_login);
         localStorage.setItem("role", LoginDetails.data.role);
         localStorage.setItem("userid", LoginDetails.data.id);
-
+        localStorage.setItem("email", LoginDetails.data.email);
         if (LoginDetails.data.role === "super_user") {
           history.push("/player-list");
         } else if (LoginDetails.data.role === "user") {

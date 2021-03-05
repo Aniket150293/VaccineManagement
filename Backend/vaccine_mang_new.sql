@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2021 at 04:45 AM
+-- Generation Time: Mar 05, 2021 at 05:08 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -45,6 +45,26 @@ INSERT INTO `company_master` (`id`, `vid`, `company_name`, `company_location`, `
 (2, 2, 'bharatbiotech', 'hydrabad', 'bb@gmail.com', 1),
 (3, 2, 'bharatbiotech', 'hydrabad', 'bb@gmail.com', 1),
 (4, 1, 'serium', 'pune', 'seriumpune@gmail.com', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comp_admin_mapping`
+--
+
+CREATE TABLE `comp_admin_mapping` (
+  `id` int(10) NOT NULL,
+  `comp_id` int(10) NOT NULL,
+  `uid` int(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `comp_admin_mapping`
+--
+
+INSERT INTO `comp_admin_mapping` (`id`, `comp_id`, `uid`) VALUES
+(1, 1, 2),
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -237,7 +257,28 @@ INSERT INTO `transaction_details` (`id`, `user_id`, `transaction_id`, `bank_txn_
 (0, 1, '20210226111212800110168125002711508', '10551531549', 'TEST_1614340750880', '250.00', 'TXN_SUCCESS', NULL, 'HDFC', '01', 'Txn Success', 'HDFC', 'dYCLtv04241463291282', 'NB', NULL, '2021-02-26 17:29:14'),
 (0, 1, '20210226111212800110168617902406174', '11699807546', 'TEST_1614340812017', '250.00', 'TXN_FAILURE', NULL, 'AXIS', '227', 'Your payment has been declined by your bank. Please try again or use a different method to complete the payment.', 'AXIS', 'dYCLtv04241463291282', 'NB', NULL, '2021-02-26 17:30:14'),
 (0, 1, '20210226111212800110168933102385169', '13935632385', 'TEST_1614341485504', '250.00', 'TXN_SUCCESS', NULL, 'SBI', '01', 'Txn Success', 'SBI', 'dYCLtv04241463291282', 'NB', NULL, '2021-02-26 17:41:28'),
-(0, 1, '20210226111212800110168553202391255', '14373370948', 'TEST_1614341589705', '250.00', 'TXN_FAILURE', NULL, 'ICICI', '227', 'Your payment has been declined by your bank. Please try again or use a different method to complete the payment.', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-02-26 17:43:12');
+(0, 1, '20210226111212800110168553202391255', '14373370948', 'TEST_1614341589705', '250.00', 'TXN_FAILURE', NULL, 'ICICI', '227', 'Your payment has been declined by your bank. Please try again or use a different method to complete the payment.', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-02-26 17:43:12'),
+(0, 1, '20210302111212800110168498502404742', '14008746277', 'TEST_1614658567438', '250.00', 'TXN_SUCCESS', NULL, 'ICICI', '01', 'Txn Success', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 09:46:13'),
+(0, 1, '20210302111212800110168498502404742', '14008746277', 'TEST_1614658567438', '250.00', 'TXN_SUCCESS', NULL, 'ICICI', '01', 'Txn Success', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 09:46:13'),
+(0, 1, '20210302111212800110168754302404305', '15841400297', 'TEST_1614658974890', '250.00', 'TXN_SUCCESS', NULL, 'AXIS', '01', 'Txn Success', 'AXIS', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 09:53:00'),
+(0, 1, '20210302111212800110168756702406134', '19226999173', 'TEST_1614659132587', '250.00', 'TXN_SUCCESS', NULL, 'PNB', '01', 'Txn Success', 'PNB', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 09:55:37'),
+(0, 1, '20210302111212800110168756702406134', '19226999173', 'TEST_1614659132587', '250.00', 'TXN_SUCCESS', NULL, 'PNB', '01', 'Txn Success', 'PNB', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 09:55:37'),
+(0, 1, '20210302111212800110168459502410716', '13947976572', 'TEST_1614659858401', '250.00', 'TXN_SUCCESS', NULL, 'ICICI', '01', 'Txn Success', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 10:07:43'),
+(0, 1, '20210302111212800110168224002424959', '16464403807', 'TEST_1614660473704', '250.00', 'TXN_SUCCESS', NULL, 'PNB', '01', 'Txn Success', 'PNB', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 10:17:58'),
+(0, 1, '20210302111212800110168951902402164', '19329394185', 'TEST_1614661019791', '250.00', 'TXN_SUCCESS', NULL, 'AXIS', '01', 'Txn Success', 'AXIS', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 10:27:04'),
+(0, 1, '20210302111212800110168197002412661', '12667877972', 'TEST_1614661377642', '250.00', 'TXN_SUCCESS', NULL, 'AXIS', '01', 'Txn Success', 'AXIS', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 10:33:02'),
+(0, 1, '20210302111212800110168197002412661', '12667877972', 'TEST_1614661377642', '250.00', 'TXN_SUCCESS', NULL, 'AXIS', '01', 'Txn Success', 'AXIS', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 10:33:02'),
+(0, 1, '20210302111212800110168108202384091', '17051338941', 'TEST_1614689413842', '250.00', 'TXN_SUCCESS', NULL, 'HDFC', '01', 'Txn Success', 'HDFC', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 18:20:20'),
+(0, 1, '20210302111212800110168324002437770', '11157588401', 'TEST_1614689633161', '250.00', 'TXN_SUCCESS', NULL, 'PNB', '01', 'Txn Success', 'PNB', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 18:23:57'),
+(0, 1, '20210302111212800110168553102407570', '15690613983', 'TEST_1614689883657', '250.00', 'TXN_SUCCESS', NULL, 'ICICI', '01', 'Txn Success', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 18:28:08'),
+(0, 1, '20210302111212800110168553102407570', '15690613983', 'TEST_1614689883657', '250.00', 'TXN_SUCCESS', NULL, 'ICICI', '01', 'Txn Success', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 18:28:08'),
+(0, 1, '20210302111212800110168637502395684', '14592336996', 'TEST_1614692267541', '250.00', 'TXN_SUCCESS', NULL, 'ICICI', '01', 'Txn Success', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 19:07:48'),
+(0, 1, '20210302111212800110168658602409449', '16384411019', 'TEST_1614692402296', '250.00', 'TXN_SUCCESS', NULL, 'ICICI', '01', 'Txn Success', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 19:10:02'),
+(0, 1, '20210302111212800110168658602409449', '16384411019', 'TEST_1614692402296', '250.00', 'TXN_SUCCESS', NULL, 'ICICI', '01', 'Txn Success', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 19:10:02'),
+(0, 1, '20210302111212800110168658602409449', '16384411019', 'TEST_1614692402296', '250.00', 'TXN_SUCCESS', NULL, 'ICICI', '01', 'Txn Success', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 19:10:02'),
+(0, 1, '20210302111212800110168658602409449', '16384411019', 'TEST_1614692402296', '250.00', 'TXN_SUCCESS', NULL, 'ICICI', '01', 'Txn Success', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 19:10:02'),
+(0, 1, '20210302111212800110168658602409449', '16384411019', 'TEST_1614692402296', '250.00', 'TXN_SUCCESS', NULL, 'ICICI', '01', 'Txn Success', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-02 19:10:02'),
+(0, 1, '20210303111212800110168592702407349', '14925596866', 'TEST_1614772747666', '250.00', 'TXN_SUCCESS', NULL, 'AXIS', '01', 'Txn Success', 'AXIS', 'dYCLtv04241463291282', 'NB', NULL, '2021-03-03 17:29:08');
 
 -- --------------------------------------------------------
 
@@ -280,7 +321,8 @@ CREATE TABLE `user_details` (
 INSERT INTO `user_details` (`id`, `profile`, `email`, `password`, `mobile`, `alternate_mobile`, `first_name`, `middle_name`, `last_name`, `address`, `city`, `state`, `zip_code`, `date_of_birth`, `month_of_birth`, `year_of_birth`, `role`, `is_active`, `is_blocked`, `last_login`, `created_at`, `modified_at`, `country`, `pcdate`, `pudate`) VALUES
 (2, 'c6ed106b-e39a-4597-b37b-73aa5b24b8f6', 'a@gmail.com', 'a', '8', '8', '8', '8', '8', '8', '8', 1, '8', 2, 9, 2020, 'super_user', 1, 0, '2020-10-15 14:15:36', '2020-08-15 14:15:36', '2020-11-17 12:24:14', '', '2020-12-30 16:59:54', '2020-12-30 17:06:21'),
 (3, '8b53e37d-9b34-4242-900d-52c8a19ac13f', 'aniketbansode15@gmail.com', '12345', '9765602975', '123456789', 'ashutosh', 'arun', 'katkar', 'hadapsar', 'pune', 20, '411028', 24, 5, 2000, 'user', 1, 0, '2020-11-10 19:11:53', '2020-11-10 19:11:53', '2020-11-27 11:46:32', '9', '2020-12-30 16:59:54', '2021-01-04 19:33:08'),
-(8, 'e7f64f69-18de-49ad-b35a-ebcf165c6977', 'b@gmail.com', 'b', '1233123123', '312312312', 'ba', 'ba', 'ba', 'pune', 'pune', 20, '1234', 9, 2, 2021, 'user', 1, 0, '2021-02-26 12:43:41', '2021-02-26 12:43:41', '2021-02-26 12:43:41', '18', '2021-02-26 12:43:41', '2021-02-26 12:43:41');
+(8, 'e7f64f69-18de-49ad-b35a-ebcf165c6977', 'b@gmail.com', 'b', '1233123123', '312312312', 'ba', 'ba', 'ba', 'pune', 'pune', 20, '1234', 9, 2, 2021, 'user', 1, 0, '2021-02-26 12:43:41', '2021-02-26 12:43:41', '2021-02-26 12:43:41', '18', '2021-02-26 12:43:41', '2021-02-26 12:43:41'),
+(9, '837d78fb-144d-488d-a6e1-bfc8398cd44f', 'ashukatkar24@gmail.com', 'aa', '113223213', '12312312', 'ashutosh', 'arun', 'katkar', 'pune', 'pune', 1, '123', 24, 5, 2000, 'user', 1, 0, '2021-03-03 10:43:35', '2021-03-03 10:43:35', '2021-03-03 10:43:35', '1', '2021-03-03 10:43:35', '2021-03-03 10:43:35');
 
 -- --------------------------------------------------------
 
@@ -390,7 +432,26 @@ INSERT INTO `vaccine_details` (`id`, `user_id`, `first_name`, `last_name`, `age`
 (53, 8, 'ba', 'ba', 3, 'pune', '2', '2', 25, 100, 33, 3300, 'female', '2021-02-26 17:29:07', 1),
 (54, 8, 'ba', 'ba', 1, 'pune', '1', '1', 10, 0, 1, 0, 'male', '2021-02-26 17:30:10', 1),
 (55, 8, 'ba', 'ba', 22, 'pune', '2', '2', 25, 100, 22, 2200, 'female', '2021-02-26 17:41:23', 1),
-(56, 8, 'ba', 'ba', 11, 'pune', '4', '4', 50, 50, 11, 550, 'other', '2021-02-26 17:43:08', 1);
+(56, 8, 'ba', 'ba', 11, 'pune', '4', '4', 50, 50, 11, 550, 'other', '2021-02-26 17:43:08', 1),
+(57, 8, 'ba', 'ba', 11, 'pune', '2', '2', 25, 100, 22, 2200, 'female', '2021-03-02 09:46:00', 1),
+(58, 8, 'ba', 'ba', 11, 'pune', '1', '1', 10, 0, 22, 0, 'male', '2021-03-02 09:49:33', 1),
+(59, 8, 'ba', 'ba', 11, 'pune', '4', '4', 50, 50, 2, 100, 'male', '2021-03-02 10:05:44', 1),
+(60, 8, 'ba', 'ba', 22, 'pune', '3', '3', 100, 100, 56, 5600, 'male', '2021-03-02 10:17:51', 1),
+(61, 8, 'ba', 'ba', 55, 'pune', '3', '3', 100, 100, 55, 5500, 'male', '2021-03-02 10:26:56', 1),
+(62, 8, 'ba', 'ba', 11, 'pune', '2', '2', 25, 100, 2, 200, 'male', '2021-03-02 10:32:44', 1),
+(63, 8, 'ba', 'ba', 11, 'pune', '3', '3', 100, 100, 22, 2200, 'male', '2021-03-02 18:20:11', 1),
+(64, 8, 'ba', 'ba', 11, 'pune', '3', '3', 100, 100, 22, 2200, 'female', '2021-03-02 18:23:45', 1),
+(65, 8, 'ba', 'ba', 2, 'pune', '1', '1', 10, 0, 22, 0, 'male', '2021-03-02 18:28:00', 1),
+(66, 8, 'ba', 'ba', 22, 'pune', '1', '1', 10, 0, 22, 0, 'male', '2021-03-02 19:07:43', 1),
+(67, 8, 'ba', 'ba', 11, 'pune', '1', '1', 10, 0, 22, 0, 'male', '2021-03-03 16:45:13', 1),
+(68, 8, 'ba', 'ba', 45, 'pune', '4', '4', 50, 50, 55, 2750, 'male', '2021-03-03 16:47:19', 1),
+(69, 8, 'ba', 'ba', 11, 'pune', '4', '4', 50, 50, 22, 1100, 'male', '2021-03-03 17:06:17', 1),
+(70, 8, 'ba', 'ba', 11, 'pune', '2', '2', 25, 100, 22, 2200, 'male', '2021-03-03 17:19:09', 1),
+(71, 8, 'ba', 'ba', 11, 'pune', '2', '2', 25, 100, 22, 2200, 'male', '2021-03-03 17:19:37', 1),
+(72, 8, 'ba', 'ba', 44, 'pune', '3', '3', 100, 100, 56, 5600, 'male', '2021-03-03 17:19:53', 1),
+(73, 9, 'ashutosh', 'katkar', 28, 'pune', '2', '2', 25, 100, 45, 4500, 'male', '2021-03-03 17:29:04', 1),
+(74, 9, 'ashutosh', 'katkar', 445, 'pune', '4', '4', 50, 50, 55, 2750, 'female', '2021-03-03 17:35:18', 1),
+(75, 9, 'ashutosh', 'katkar', 45, 'pune', '1', '1', 10, 0, 12, 0, 'male', '2021-03-04 09:26:55', 1);
 
 -- --------------------------------------------------------
 
@@ -475,13 +536,13 @@ ALTER TABLE `state_master`
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `vaccine_details`
 --
 ALTER TABLE `vaccine_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -43,10 +43,10 @@ router.post("/callback", (req, res) => {
       // console.log("checksum match");
       var a = connection.query(
         "INSERT INTO  transaction_details " +
-          "( user_id, transaction_id, bank_txn_id, order_id, amount, " +
-          "status, txn_type, gateway_name, response_code, response_msg, bank_name, mid, payment_mode, " +
-          "refund_amount, transaction_date ) " +
-          "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ",
+        "( user_id, transaction_id, bank_txn_id, order_id, amount, " +
+        "status, txn_type, gateway_name, response_code, response_msg, bank_name, mid, payment_mode, " +
+        "refund_amount, transaction_date ) " +
+        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ",
         [
           "1",
           req.body.TXNID,

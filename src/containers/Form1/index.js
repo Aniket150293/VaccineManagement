@@ -151,6 +151,7 @@ export default function Form1({
                     if (response.data.status == 200) {
                         localStorage.setItem("email", email);
                         localStorage.setItem("mobile", mobile);
+                        localStorage.setItem("final_amount", setFinalamt);
                         NotificationModel("bg-success", response.data.msg);
                         if (!edit) {
                             // setMobileNo("");

@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Table, Modal, Row, Input, ButtonToolbar } from "reactstrap";
-import { getList } from '../../actions'
+import { getList, Paymentmail } from '../../actions'
 import { connect } from "react-redux";
-export default function List({ getList, getListsuccess }) {
+export default function List({ getList, getListsuccess, Paymentmail, Paymentmailsuccess }) {
+
+    const [Class, SetClass] = useState();
+    const [Notification, SetNotification] = useState(false);
+    const NotificationClose = () => SetNotification(false);
+    const NotificationShow = () => SetNotification(true);
+    const [Msg, SetMsg] = useState();
+    function NotificationModel(Class, Msg) {
+        SetClass(Class);
+        SetMsg(Msg);
+        NotificationShow();
+        setTimeout(function () {
+            NotificationClose();
+        }, 5000);
+    }
+
+
 
     const [data, setData] = useState([]);
     const [data1, setData1] = useState();
@@ -16,7 +32,20 @@ export default function List({ getList, getListsuccess }) {
         }
     }, [getListsuccess]);
 
+    const [pdata1, setPData1] = useState();
+    React.useEffect(() => {
+        if (Paymentmailsuccess) {
 
+            if (Paymentmailsuccess.status == 200) {
+
+                // NotificationModel("bg-success", `${(JSON.stringify(pdata1))}`);
+                NotificationModel("bg-success", "Payment Done Succesfully and  Email Sent Sucssesfully");
+                setPData1(Paymentmailsuccess.data);
+                //  let a = JSON.stringify(pdata1)
+                console.log(pdata1)
+            }
+        }
+    }, [Paymentmailsuccess]);
 
     React.useEffect(() => {
         getList(
@@ -26,18 +55,27 @@ export default function List({ getList, getListsuccess }) {
             },
             localStorage.getItem("token")
         );
-    }, []);
+        Paymentmail(
+
+            {
+                final_amount: localStorage.getItem("final_amount"),
+                amountperdose: localStorage.getItem("amountperdose"),
+                userid: localStorage.getItem("userid"),
+                email: localStorage.getItem("email"),
+            },
+            localStorage.getItem("token")
+        );
+    }, [getList, Paymentmail]);
     const [pay, setPay] = useState();
     React.useEffect(() => {
 
         localStorage.getItem("paymentin", pay);
     });
 
-
-
-
     return (
+
         <div
+
             className="container-fluid py-5 "
             style={{ "background-color": "#333333" }}
         >
@@ -73,15 +111,40 @@ export default function List({ getList, getListsuccess }) {
                 </Table>
                 {/* </div> */}
             </Form>
+            {/* {alert(JSON.stringify(pdata1))} */}
+            <div className="container mt-5">
+
+                <Modal
+                    className="modal-dialog modal-danger"
+                    contentClassName={Class}
+                    isOpen={Notification}
+                    toggle={NotificationClose}
+                >
+                    <div className="modal-header">
+                        <div className="mt-1 modal-title heading">{Msg}</div>
+                        <button
+                            aria-label="Close"
+                            className="close"
+                            data-dismiss="modal"
+                            type="button"
+                            onClick={NotificationClose}
+                        >
+                            <span aria-hidden={true}>×</span>
+                        </button>
+                    </div>
+                </Modal>
+            </div>
         </div>
     )
 }
 const mapDispatchToProps = {
     getList: getList,
+    Paymentmail: Paymentmail
 };
 
 const mapStateToProps = (state) => ({
-    getListsuccess: state.getListsuccess
+    getListsuccess: state.getListsuccess,
+    Paymentmailsuccess: state.Paymentmailsuccess
 });
 
 List = connect(

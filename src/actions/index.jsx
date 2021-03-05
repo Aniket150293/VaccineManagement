@@ -175,3 +175,9 @@ export const getList = (data, token) => ({
   token: token,
   data: data,
 });
+
+export const Paymentmail = (data, token) => ({
+  type: "Paymentmail",
+  token: token,
+  data: data,
+});
