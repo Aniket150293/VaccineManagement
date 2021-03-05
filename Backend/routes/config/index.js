@@ -1,11 +1,11 @@
-var mysql = require('mysql');
+var mysql = require("mysql");
 
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'vcmng'
-})
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "vaccine_management",
+});
 
 connection.connect(function (err) {
   if (err) {

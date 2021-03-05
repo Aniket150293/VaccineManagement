@@ -77,7 +77,7 @@ router.post("/forgetPassword", function (req, res, next) {
             // var d = new Date();
             // var link = "http://localhost:8080/#/forgot-password/" + uuid.v4() + "$" + rows[0].id + "$" + d.getHours() + "-" + d.getMinutes() + "$" + d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear()
             var mailOptions = {
-              from: "ashutoshka24@gmail.com",
+              from: "",
               to: req.body.email,
               subject: "Forgot Password Request",
               html: `<p>Hi,<br/>
