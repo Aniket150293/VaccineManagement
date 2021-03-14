@@ -13,29 +13,28 @@ const devapi = {
   getMasterBankList: url + "registereduserdetails/getMasterBankList",
   submitRegisteredBankAdmin: url + "admindetails/submitRegisteredBankAdmin",
   getBankSpecificUserList: url + "dashboard/getBankSpecificUserList",
-  submitTransferMoneyDetails: url + "VirusDetails/submitTransferMoneyDetails",
-  getBalence: url + "VirusDetails/getBalence",
-  getAccounts: url + "VirusDetails/getAccounts",
-  searchAccount: url + "VirusDetails/searchAccount",
+  submitTransferMoneyDetails: url + "virusdetails/submitTransferMoneyDetails",
+  getBalence: url + "virusdetails/getBalence",
+  getAccounts: url + "virusdetails/getAccounts",
+  searchAccount: url + "virusdetails/searchAccount",
   forgetPassword: url + "users/forgetPassword",
   checkPasswordDate: url + "users/checkPasswordDate",
   resetPassword: url + "users/resetPassword",
-  getHomeDetails: url + "dashboard/getHomeDetails",
   payment: url + "payment/payment",
   callback: url + "callback/callback",
 
-  getVirus: url + "VirusDetails/getVirus",
+  getVirus: url + "virusdetails/getVirus",
   getCompany: url + "registereduserdetails/getCompany",
-  getSports: url + "VirusDetails/getSports",
+  getSports: url + "virusdetails/getSports",
   getState: url + "registereduserdetails/getState",
 
   getCountry: url + "registereduserdetails/getCountry",
-  getMysport: url + "VirusDetails/getMysport",
-  getSpetialization: url + "VirusDetails/getSpetialization",
+  getMysport: url + "virusdetails/getMysport",
+  getSpetialization: url + "virusdetails/getSpetialization",
 
   getVcount: url + "VirusDetails/getVcount",
   getList: url + "VirusDetails/getList",
-  Paymentmail: url + "VirusDetails/Paymentmail"
+  Paymentmail: url + "VirusDetails/Paymentmail",
 };
 
 function* checkLoginDetails(action) {
@@ -229,18 +228,6 @@ function* resetPassword(action) {
   yield put({ type: "resetPasswordSucsses", json: json });
 }
 
-function* getHomeDetails(action) {
-  const json = yield fetch(devapi.getHomeDetails, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: action.token,
-    },
-    body: JSON.stringify(action.data),
-  }).then((response) => response.json());
-  yield put({ type: "getHomeDetailsSucsses", json: json });
-}
-
 function* logout() {
   yield put({ type: "LOGOUT_SUCCESS" });
 }
@@ -389,8 +376,6 @@ function* Paymentmail(action) {
   yield put({ type: "Paymentmailsuccess", json: json });
 }
 
-
-
 function* actionWatcher() {
   yield takeLatest("CHECK_LOGIN_DETAILS", checkLoginDetails);
   yield takeLatest("GET_REGISTERED_USER_LIST", getRegisteredUserList);
@@ -408,7 +393,7 @@ function* actionWatcher() {
   yield takeLatest("forgetPassword", forgetPassword);
   yield takeLatest("checkPasswordDate", checkPasswordDate);
   yield takeLatest("resetPassword", resetPassword);
-  yield takeLatest("getHomeDetails", getHomeDetails);
+
   yield takeLatest("payment", payment);
   yield takeLatest("callback", callback);
 

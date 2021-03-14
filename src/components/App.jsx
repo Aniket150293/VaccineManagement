@@ -6,13 +6,11 @@ import Footer from "./Footer";
 import VaccineDetails from "../containers/VaccineDetails";
 import Register from "../containers/Register";
 import CreatedCustomerList from "../containers/CreatedCustomerList";
-
 import Login from "../containers/Login";
 import ForgotPassword from "../containers/ForgotPassword";
 import ChangePassword from "../containers/ChangePassword";
 import Payment from "../containers/Payment";
-import Myregisteredsport from "../containers/Myregisteredsport";
-import Form from '../containers/Form1';
+import Form from "../containers/OrderForm";
 import List from "../containers/List";
 let App = () => (
   <Router>
@@ -33,10 +31,9 @@ let App = () => (
     <Route path="/player-list/" component={CreatedCustomerList} />
 
     <Route path="/vaccine-details/" component={VaccineDetails} />
-    <Route path="/form1/" component={Form} />
+    <Route path="/order-form/" component={Form} />
     <Route path="/payment/" component={Payment} />
     <Route path="/list" component={List} />
-    <Route path="/myregisteredsport/" component={Myregisteredsport} />
 
     <Footer />
   </Router>

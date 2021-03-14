@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/users", require("./routes/users"));
 app.use("/registereduserdetails", require("./routes/registereduserdetails"));
 app.use("/admindetails", require("./routes/admindetails"));
-app.use("/VirusDetails", require("./routes/VirusDetails"));
+app.use("/virusdetails", require("./routes/virusdetails"));
 app.use("/dashboard", require("./routes/dashboard"));
 app.use("/payment", require("./routes/payment"));
 

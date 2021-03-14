@@ -15,7 +15,8 @@ router.post("/payment", function (req, res, next) {
   params["ORDER_ID"] = "TEST_" + new Date().getTime();
   params["CUST_ID"] = req.body.userid;
   params["TXN_AMOUNT"] = "250.00";
-  params["CALLBACK_URL"] = "http://localhost:3000/payment/callback";
+  params["CALLBACK_URL"] =
+    "http://localhost:3000/payment/callback/" + +req.body.userid;
   params["EMAIL"] = req.body.email;
   params["MOBILE_NO"] = req.body.mobile;
 
@@ -28,7 +29,7 @@ router.post("/payment", function (req, res, next) {
   );
 });
 
-router.post("/callback", (req, res) => {
+router.post("/callback/:id", (req, res) => {
   console.log(req.body);
 
   var result = checksum_lib.verifychecksum(
@@ -43,10 +44,10 @@ router.post("/callback", (req, res) => {
       // console.log("checksum match");
       var a = connection.query(
         "INSERT INTO  transaction_details " +
-        "( user_id, transaction_id, bank_txn_id, order_id, amount, " +
-        "status, txn_type, gateway_name, response_code, response_msg, bank_name, mid, payment_mode, " +
-        "refund_amount, transaction_date ) " +
-        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ",
+          "( user_id, transaction_id, bank_txn_id, order_id, amount, " +
+          "status, txn_type, gateway_name, response_code, response_msg, bank_name, mid, payment_mode, " +
+          "refund_amount, transaction_date ) " +
+          "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ",
         [
           "1",
           req.body.TXNID,

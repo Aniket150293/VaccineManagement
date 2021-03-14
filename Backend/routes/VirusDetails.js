@@ -18,8 +18,8 @@ router.post("/submitTransferMoneyDetails", (req, res, next) => {
 
         connection.query(
           "INSERT INTO transaction_details " +
-          "( transaction_id,  mode_of_transfer, type_of_transfer,from_account,to_account, amount,from_bank_id,  to_bank_id, from_user_id, to_user_id, performed_date, is_pending, is_cancelled, is_approved,  performed_by ) " +
-          "VALUES (?,?,0,?,?,?,?,?,?,?,now(),1,0,0,?) ",
+            "( transaction_id,  mode_of_transfer, type_of_transfer,from_account,to_account, amount,from_bank_id,  to_bank_id, from_user_id, to_user_id, performed_date, is_pending, is_cancelled, is_approved,  performed_by ) " +
+            "VALUES (?,?,0,?,?,?,?,?,?,?,now(),1,0,0,?) ",
           [
             transactionId,
             req.body.mode,
@@ -251,7 +251,6 @@ router.post("/getVirus", (req, res, next) => {
 //   });
 // });
 
-
 router.post("/getSpetialization", (req, res, next) => {
   jwt.verify(
     req.headers["authorization"],
@@ -297,7 +296,9 @@ router.post("/getSpetialization", (req, res, next) => {
   );
 });
 router.post("/getVcount", (req, res, next) => {
-  connection.query("SELECT available_count,amount_per_dose from vaccine_available_count where vaccine_id=? ", [req.body.vid],
+  connection.query(
+    "SELECT available_count,amount_per_dose from vaccine_available_count where vaccine_id=? ",
+    [req.body.vid],
     //[req.body.id],
     function (err, rows) {
       if (err) {
@@ -305,10 +306,13 @@ router.post("/getVcount", (req, res, next) => {
       } else {
         res.send({ status: 200, data: rows, msg: "get Successfully" });
       }
-    });
+    }
+  );
 });
 router.post("/getList", (req, res, next) => {
-  connection.query("Select vname,company_name,Total_quantity,Final_amount, DATE_FORMAT(vaccine_details.created_date,'%d-%m-%y') as cddate  FROM ((vaccine_details INNER JOIN  company_master ON  vaccine_details.company_id=company_master.id) INNER JOIN virus_details ON vaccine_details.vaccine_id=virus_details.id) WHERE user_id=?", [req.body.userid],
+  connection.query(
+    "Select vname,company_name,Total_quantity,Final_amount, DATE_FORMAT(vaccine_details.created_date,'%d-%m-%y') as cddate  FROM ((vaccine_details INNER JOIN  company_master ON  vaccine_details.company_id=company_master.id) INNER JOIN virus_details ON vaccine_details.vaccine_id=virus_details.id) WHERE user_id=?",
+    [req.body.userid],
     //[req.body.id],
     function (err, rows) {
       if (err) {
@@ -316,12 +320,11 @@ router.post("/getList", (req, res, next) => {
       } else {
         res.send({ status: 200, data: rows, msg: "get Successfully" });
       }
-    });
+    }
+  );
 });
 
-
 router.post("/Paymentmail", (req, res, next) => {
-  //[req.body.id],
   let amt = req.body.final_amount;
   let amtperdose = req.body.amountperdose;
   if (req.body.userid) {
@@ -336,7 +339,7 @@ router.post("/Paymentmail", (req, res, next) => {
       },
     });
     var mailOptions = {
-      from: "ashutoshka24@gmail.com",
+      from: config.Mailconfig.emailid,
       to: req.body.email,
       subject: "order vaccine Request",
       html: `<p>Hi,<br/>
@@ -351,11 +354,15 @@ router.post("/Paymentmail", (req, res, next) => {
       } else {
         console.log("Email sent: " + info.response);
       }
-    })
-    data1 = "Successfull"
-    res.send({ status: 200, data: data1, msg: "Successssssssssssssssss" })
+    });
+    data1 = "Successfull";
+    res.send({ status: 200, data: data1, msg: "Successssssssssssssssss" });
   } else {
-    res.send({ status: 400, data: data1, msg: "nottttttttttttttttttSuccessssssssssssssssss" })
+    res.send({
+      status: 400,
+      data: data1,
+      msg: "nottttttttttttttttttSuccessssssssssssssssss",
+    });
   }
 });
 module.exports = router;

@@ -36,7 +36,8 @@ export default function Header({ logout }) {
     tabBar1,
     tabBar2,
     tabBar3,
-    tabBar4,
+    orderedList,
+    orderedVaccine,
     logoutBtn,
     userSettings,
     contactUS,
@@ -151,6 +152,40 @@ export default function Header({ logout }) {
         </UncontrolledDropdown>
       </Nav>
     );
+    orderedVaccine = (
+      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+        <UncontrolledDropdown nav>
+          <DropdownToggle nav>
+            <i className="ni ni-collection d-lg-none mr-1" />
+            <span className="font-weight-bold nav-link-inner--text text-danger">
+              Order Form
+            </span>
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem to="/vaccine-details" tag={Link}>
+              Order Form
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </Nav>
+    );
+    orderedList = (
+      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+        <UncontrolledDropdown nav>
+          <DropdownToggle nav>
+            <i className="ni ni-collection d-lg-none mr-1" />
+            <span className="font-weight-bold nav-link-inner--text text-danger">
+              Order List
+            </span>
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem to="/list" tag={Link}>
+              Order List
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </Nav>
+    );
   }
 
   return (
@@ -225,7 +260,8 @@ export default function Header({ logout }) {
               {tabBar1}
               {tabBar2}
               {tabBar3}
-              {tabBar4}
+              {orderedVaccine}
+              {orderedList}
               {userSettings}
               {logoutBtn}
             </UncontrolledCollapse>
