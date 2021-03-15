@@ -89,6 +89,8 @@ export default function Form1({
   React.useEffect(() => {
     if (submitRegisteredUserSucsses)
       if (submitRegisteredUserSucsses.status == 200) {
+        console.log("!!!!!!!!!!!!!");
+        console.log(submitRegisteredUserSucsses.data.rows[0]);
         setUsrid(submitRegisteredUserSucsses.data.rows[0].id);
         setfirstname(submitRegisteredUserSucsses.data.rows[0].first_name);
         //setmiddle_name(submitRegisteredUserSucsses.data.rows[0].middle_name);
@@ -199,6 +201,7 @@ export default function Form1({
           <Form noValidate validated={isSubmit} onSubmit={handleSubmit}>
             <Row>
               <Form.Group as={Col} lg="6">
+                <label>First Name</label>
                 <Input
                   required
                   value={firstname}
@@ -212,6 +215,7 @@ export default function Form1({
               </Form.Group>
 
               <Form.Group as={Col} lg="6">
+                <label>Last Name</label>
                 <Input
                   required
                   value={lastname}
@@ -229,22 +233,7 @@ export default function Form1({
             </Row>
             <Row>
               <Form.Group as={Col} lg="6">
-                <Input
-                  required
-                  value={usrid}
-                  className="form-control-alternative"
-                  type="text"
-                  placeholder="User id"
-                  readOnly
-                  onChange={(e) => setUsrid(e.target.value)}
-                />
-                {validateMsgValid}
-                {validateMsgInvalid}
-              </Form.Group>
-            </Row>
-
-            <Row>
-              <Form.Group as={Col} lg="6">
+                <label>Age</label>
                 <Input
                   required
                   value={age}
@@ -258,6 +247,7 @@ export default function Form1({
               </Form.Group>
 
               <Form.Group as={Col} lg="6">
+                <label>Address</label>
                 <Input
                   required
                   value={address}
@@ -276,6 +266,7 @@ export default function Form1({
 
             <Row>
               <Form.Group as={Col} lg="6">
+                <label>Company Name</label>
                 <Input
                   required
                   value={cname}
@@ -290,6 +281,7 @@ export default function Form1({
               </Form.Group>
 
               <Form.Group as={Col} lg="6">
+                <label>Vaccine Name</label>
                 <Input
                   required
                   value={vname}
@@ -308,6 +300,7 @@ export default function Form1({
             </Row>
             <Row>
               <Form.Group as={Col} lg="6">
+                <label>Vaccine Count</label>
                 <Input
                   required
                   value={vaccine_count}
@@ -326,6 +319,7 @@ export default function Form1({
             </Row>
             <Row>
               <Form.Group as={Col} lg="6">
+                <label>Vaccine Amount</label>
                 <Input
                   required
                   value={vaccine_amount}
@@ -344,6 +338,7 @@ export default function Form1({
             </Row>
             <Row>
               <Form.Group as={Col} lg="6">
+                <label>Vaccine Dose</label>
                 <Input
                   required
                   value={total_dose}
@@ -361,6 +356,7 @@ export default function Form1({
             </Row>
             <Row>
               <Form.Group as={Col} lg="6">
+                <label>Final Amount</label>
                 <Input
                   required
                   value={(setFinalamt = total_dose * vaccine_amount)}
