@@ -1,5 +1,5 @@
 import React from "react";
-// //reactstrap components
+// reactstrap components
 import {
   Button,
   NavItem,
