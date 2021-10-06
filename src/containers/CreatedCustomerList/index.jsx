@@ -6,7 +6,7 @@ import {
   getRegisteredUserList,
   getSports,
   getSpetialization,
-  getList
+  getList,
 } from "../../actions";
 import { IoMdLock, IoIosCheckmarkCircle } from "react-icons/io";
 import { CSVLink } from "react-csv";
@@ -21,7 +21,8 @@ export default function CreatedCustomerList({
   getSportsSucsses,
   getSpetializationSucsses,
   getSpetialization,
-  getList, getListsuccess
+  getList,
+  getListsuccess,
 }) {
   const [isSubmit, setIsSubmit] = useState();
   const [Class, SetClass] = useState();
@@ -44,12 +45,11 @@ export default function CreatedCustomerList({
   const [specialization, setspecialization] = useState();
 
   useEffect(() => {
-
     getRegisteredUserList(
-
       {
         role: localStorage.getItem("role"),
-        userid: localStorage.getItem("userid"), months: ""
+        userid: localStorage.getItem("userid"),
+        months: "",
       },
       localStorage.getItem("token")
     );
@@ -62,16 +62,12 @@ export default function CreatedCustomerList({
   const [data, setData] = useState([]);
   React.useEffect(() => {
     if (getListsuccess) {
-
       if (getListsuccess.status == 200) {
         console.log(getListsuccess);
         setData(getListsuccess.data);
       }
     }
   }, [getListsuccess]);
-
-
-
 
   React.useEffect(() => {
     if (RegisteredUserList)
@@ -83,10 +79,6 @@ export default function CreatedCustomerList({
         setdata1(RegisteredUserList.data);
       }
   }, [RegisteredUserList]);
-
-
-
-
 
   React.useEffect(() => {
     if (registeredUserDetails)
@@ -201,9 +193,7 @@ export default function CreatedCustomerList({
                       <td>{item.email}</td>
                       <td>{item.mobile}</td>
                       {/* <td>{item.address}</td> */}
-                      <td>
-                        {item.age} Years
-                      </td>
+                      <td>{item.age} Years</td>
                       {/* <td>{item.sport_id}</td> */}
 
                       <td>
@@ -233,15 +223,15 @@ export default function CreatedCustomerList({
                   );
                 })
               ) : (
-                  <tr></tr>
-                )}
+                <tr></tr>
+              )}
             </tbody>
           </Table>
         </div>
         <div className="card-footer text-center">
           <CSVLink
             data={data1 ? data1 : ""}
-            filename={"Player-List" + new Date().getTime() + ".csv"}
+            filename={"Customer-List" + new Date().getTime() + ".csv"}
             className="btn btn-danger"
             target="_blank"
           >
@@ -256,13 +246,13 @@ export default function CreatedCustomerList({
 const mapDispatchToProps = {
   getRegisteredUserList: getRegisteredUserList,
   submitRegisteredUser: submitRegisteredUser,
-  getList: getList
+  getList: getList,
 };
 
 const mapStateToProps = (state) => ({
   RegisteredUserList: state.registeredUserList,
   registeredUserDetails: state.registeredUserDetails,
-  getListsuccess: state.getListsuccess
+  getListsuccess: state.getListsuccess,
 });
 
 CreatedCustomerList = connect(

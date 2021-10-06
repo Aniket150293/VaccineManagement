@@ -53,51 +53,68 @@ export default function Header({ logout }) {
             </span>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem to="/player-list" tag={Link}>
+            <DropdownItem to="/customer-list" tag={Link}>
               Customer List
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>
     );
-  } else if (localStorage.getItem("role") === "user") {
-    //   tabBar = (
-    //     <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-    //       <UncontrolledDropdown nav>
-    //         <DropdownToggle nav>
-    //           <i className="ni ni-collection d-lg-none mr-1" />
-    //           <span className="font-weight-bold nav-link-inner--text text-danger">
-    //             Register Sport
-    //           </span>
-    //         </DropdownToggle>
-    //         <DropdownMenu>
-    //           <DropdownItem to="/register-sport" tag={Link}>
-    //             Register Sport
-    //           </DropdownItem>
-    //         </DropdownMenu>
-    //       </UncontrolledDropdown>
-    //     </Nav>
-    //   );
-    //   tabBar4 = (
-    //     <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-    //       <UncontrolledDropdown nav>
-    //         <DropdownToggle nav>
-    //           <i className="ni ni-collection d-lg-none mr-1" />
-    //           <span className="font-weight-bold nav-link-inner--text text-danger">
-    //             My Registered Sport
-    //           </span>
-    //         </DropdownToggle>
-    //         <DropdownMenu>
-    //           <DropdownItem to="/myregisteredsport" tag={Link}>
-    //             My Registered Sport
-    //           </DropdownItem>
-    //         </DropdownMenu>
-    //       </UncontrolledDropdown>
-    //     </Nav>
-    //   );
-  }
+    logoutBtn = (
+      <Nav className="align-items-lg-center ml-lg-auto" navbar>
+        {/* <NavItem className="d-none d-lg-block ml-lg-4">
+          <span className="mb-0 text-white  font-weight-bold">
 
-  if (localStorage.getItem("role") != null) {
+          </span>
+          &nbsp;
+          <Button className="btn btn-warning" onClick={logout1}>
+            Logout
+          </Button>
+        </NavItem> */}
+
+        <UncontrolledDropdown nav>
+          <DropdownToggle className="p-0 m-0" nav>
+            <i className="ni ni-collection ml-lg-auto d-lg-none mr-1" />
+            <span className="font-weight-bold nav-link-inner--text">
+              {localStorage.getItem("firstname")} &nbsp;{" "}
+              {localStorage.getItem("lastname")}&nbsp;
+            </span>
+            <Button className="btn btn-danger" onClick={logout1}>
+              Logout
+            </Button>
+          </DropdownToggle>
+          {/* <DropdownMenu>
+            <DropdownItem>
+
+            </DropdownItem>
+          </DropdownMenu> */}
+        </UncontrolledDropdown>
+      </Nav>
+    );
+    userSettings = (
+      <Nav className="navbar-nav-hover align-items-lg-center  " navbar>
+        <UncontrolledDropdown nav>
+          <DropdownToggle nav>
+            <i className="ni ni-collection d-lg-none mr-1 " />
+            <span className="font-weight-bold nav-link-inner--text text-danger ">
+              User Settings
+            </span>
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem
+              to={"/register/" + localStorage.getItem("userid")}
+              tag={Link}
+            >
+              Edit Profile
+            </DropdownItem>
+            <DropdownItem to="/changePassword" tag={Link}>
+              Change Password
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </Nav>
+    );
+  } else if (localStorage.getItem("role") === "user") {
     logoutBtn = (
       <Nav className="align-items-lg-center ml-lg-auto" navbar>
         {/* <NavItem className="d-none d-lg-block ml-lg-4">
@@ -187,6 +204,97 @@ export default function Header({ logout }) {
       </Nav>
     );
   }
+
+  // if (localStorage.getItem("role") != null) {
+  //   logoutBtn = (
+  //     <Nav className="align-items-lg-center ml-lg-auto" navbar>
+  //       {/* <NavItem className="d-none d-lg-block ml-lg-4">
+  //         <span className="mb-0 text-white  font-weight-bold">
+
+  //         </span>
+  //         &nbsp;
+  //         <Button className="btn btn-warning" onClick={logout1}>
+  //           Logout
+  //         </Button>
+  //       </NavItem> */}
+
+  //       <UncontrolledDropdown nav>
+  //         <DropdownToggle className="p-0 m-0" nav>
+  //           <i className="ni ni-collection ml-lg-auto d-lg-none mr-1" />
+  //           <span className="font-weight-bold nav-link-inner--text">
+  //             {localStorage.getItem("firstname")} &nbsp;{" "}
+  //             {localStorage.getItem("lastname")}&nbsp;
+  //           </span>
+  //           <Button className="btn btn-danger" onClick={logout1}>
+  //             Logout
+  //           </Button>
+  //         </DropdownToggle>
+  //         {/* <DropdownMenu>
+  //           <DropdownItem>
+
+  //           </DropdownItem>
+  //         </DropdownMenu> */}
+  //       </UncontrolledDropdown>
+  //     </Nav>
+  //   );
+  //   userSettings = (
+  //     <Nav className="navbar-nav-hover align-items-lg-center  " navbar>
+  //       <UncontrolledDropdown nav>
+  //         <DropdownToggle nav>
+  //           <i className="ni ni-collection d-lg-none mr-1 " />
+  //           <span className="font-weight-bold nav-link-inner--text text-danger ">
+  //             User Settings
+  //           </span>
+  //         </DropdownToggle>
+  //         <DropdownMenu>
+  //           <DropdownItem
+  //             to={"/register/" + localStorage.getItem("userid")}
+  //             tag={Link}
+  //           >
+  //             Edit Profile
+  //           </DropdownItem>
+  //           <DropdownItem to="/changePassword" tag={Link}>
+  //             Change Password
+  //           </DropdownItem>
+  //         </DropdownMenu>
+  //       </UncontrolledDropdown>
+  //     </Nav>
+  //   );
+  //   orderedVaccine = (
+  //     <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+  //       <UncontrolledDropdown nav>
+  //         <DropdownToggle nav>
+  //           <i className="ni ni-collection d-lg-none mr-1" />
+  //           <span className="font-weight-bold nav-link-inner--text text-danger">
+  //             Order Form
+  //           </span>
+  //         </DropdownToggle>
+  //         <DropdownMenu>
+  //           <DropdownItem to="/vaccine-details" tag={Link}>
+  //             Order Form
+  //           </DropdownItem>
+  //         </DropdownMenu>
+  //       </UncontrolledDropdown>
+  //     </Nav>
+  //   );
+  //   orderedList = (
+  //     <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+  //       <UncontrolledDropdown nav>
+  //         <DropdownToggle nav>
+  //           <i className="ni ni-collection d-lg-none mr-1" />
+  //           <span className="font-weight-bold nav-link-inner--text text-danger">
+  //             Order List
+  //           </span>
+  //         </DropdownToggle>
+  //         <DropdownMenu>
+  //           <DropdownItem to="/list" tag={Link}>
+  //             Order List
+  //           </DropdownItem>
+  //         </DropdownMenu>
+  //       </UncontrolledDropdown>
+  //     </Nav>
+  //   );
+  // }
 
   return (
     <div>
