@@ -1,4 +1,4 @@
-# XSPORTSZ
+# Vaccine Management
 
 ### Usage
 
